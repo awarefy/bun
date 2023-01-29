@@ -3,7 +3,6 @@ package bun
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"reflect"
 
 	"github.com/uptrace/bun/internal"
@@ -105,9 +104,7 @@ func (m *hasManyModel) Scan(src interface{}) error {
 func (m *hasManyModel) parkStruct() error {
 	baseValues, ok := m.baseValues[internal.NewMapKey(m.structKey)]
 	if !ok {
-		return fmt.Errorf(
-			"bun: has-many relation=%s does not have base %s with id=%q (check join conditions)",
-			m.rel.Field.GoName, m.baseTable, m.structKey)
+		return nil
 	}
 
 	for i, v := range baseValues {
