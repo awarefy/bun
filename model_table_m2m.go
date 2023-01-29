@@ -3,7 +3,6 @@ package bun
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"reflect"
 
 	"github.com/uptrace/bun/internal"
@@ -121,9 +120,7 @@ func (m *m2mModel) scanM2MColumn(column string, src interface{}) error {
 func (m *m2mModel) parkStruct() error {
 	baseValues, ok := m.baseValues[internal.NewMapKey(m.structKey)]
 	if !ok {
-		return fmt.Errorf(
-			"bun: m2m relation=%s does not have base %s with key=%q (check join conditions)",
-			m.rel.Field.GoName, m.baseTable, m.structKey)
+		return nil
 	}
 
 	for _, v := range baseValues {
